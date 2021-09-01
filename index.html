@@ -1,1 +1,31 @@
-
+<html>
+  <head><title>Clicker</title></head>
+  <body>
+    <div id="background">
+    <center><br><br><br><br><br><br><br>
+        <button id="clickbtn">Click</button><br><br><br>
+        <p>Money:<span id ="score"></span></p>
+    </center>
+</div>
+    <script>
+      document.querySelector('#score').innerHTML = cookie('get','score') + "$";
+document.querySelector('#clickbtn').onclick=function(){ clickBtn(); }
+ 
+var score = cookie('get','score');
+ 
+function clickBtn() {
+    score++;
+    document.querySelector('#score').innerHTML = score + "$";
+    cookie('set','score=' + score);
+}
+ 
+function cookie(option,keyValue){
+    switch(option){
+        case option = 'set' : document.cookie = keyValue+"; expires=Fri, 31 Dec 9999 23:59:59 GMT"; break;
+        case option = 'get' : return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(keyValue).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null; break;
+        case option = 'remove' : document.cookie = keyValue+"=; expires=Fri, 01 Jan 1970 00:00:00 GMT"; break;
+    }
+}
+    </script>
+  </body>
+</html>
